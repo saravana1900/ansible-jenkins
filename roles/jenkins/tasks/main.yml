@@ -1,28 +1,29 @@
 ---
 # tasks file for jenkins
- - name: Download Jenkins apt URL for Ubuntu
-   apt_key:
-      url: "{{jenkins.repo_URL}}"
-      state: present
+ - name: Download Jenkins apt URL KEY for Ubuntu
+   ansible.builtin.get_url:
+      url: "{{jenkins.repo_KEY}}"
+      dest: "{{jenkins.repo_KEY_DEST}}"
+      
    become: yes
 
  - name: Ensure the Jenkins repository is configured
    apt_repository: 
-      repo='https://pkg.jenkins.io/debian-stable binary/'
+      repo: 'deb [signed-by="{{jenkins.repo_KEY_DEST}}"] "{{jenkins.repo_URL}}"'
       state: present
    become: yes
 
- - name: Update apt Cache
+ - name: Update apt Cache Running - "sudo apt update"
    apt: 
       update_cache: yes
       state: latest
 
- - name: Ensure Open Java 11 JDK is present - Install Java 11
+ - name: Ensure Open Java 11 JDK is present - Installing Java 11
    apt:
       name: "{{java}}"
       state: present
 
- - name: Install Jenkins
+ - name: Installing Jenkins
    apt:
       name: jenkins
       state: latest
@@ -32,6 +33,3 @@
       name: jenkins
       enabled: true
       state: started
-
-
-
