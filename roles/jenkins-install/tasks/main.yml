@@ -39,4 +39,7 @@
       enabled: true
       state: started
    register: jenkinsservice_result
+   notify:
+     - jenkins service started
+     
 
