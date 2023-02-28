@@ -17,7 +17,7 @@ cd ansible-playbook-jenkins
 jenkins_master ansible_host=10.0.1.10
 ```
 
-### Run the playbook to install Jenkins in th target server
+### Run the playbook to install Jenkins in the target server
 ```
 ansible-playbook -i jenkins-hosts jenkins.yml
 ```
