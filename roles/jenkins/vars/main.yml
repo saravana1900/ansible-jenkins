@@ -1,7 +1,7 @@
 ---
 # vars file for jenkins
 
-java: "openjdk-11-jdk"
+java: "default-jdk"
 jenkins:
    repo_KEY: "https://pkg.jenkins.io/debian-stable/jenkins.io.key"
    repo_KEY_DEST: "/usr/share/keyrings/jenkins-keyring.asc"
