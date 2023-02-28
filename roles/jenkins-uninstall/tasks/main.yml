@@ -1,9 +1,8 @@
 ---
 # tasks file for jenkins
  - name: Remove Jenkins apt URL KEY - Ubuntu
-   ansible.builtin.get_url:
-      url: "{{jenkins.repo_KEY}}"
-      dest: "{{jenkins.repo_KEY_DEST}}"
+   file:
+      path: "{{jenkins.repo_KEY_DEST}}"
       state: absent
    register: command_result
    become: yes
