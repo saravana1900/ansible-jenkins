@@ -5,4 +5,4 @@
    debugger: on_failed
    become: yes
    roles:
-    - role: jenkins-install
+    - role: jenkins-uninstall

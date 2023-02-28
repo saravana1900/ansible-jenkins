@@ -1,0 +1,42 @@
+---
+# tasks file for jenkins
+ - name: Download Jenkins apt URL KEY for Ubuntu
+   ansible.builtin.get_url:
+      url: "{{jenkins.repo_KEY}}"
+      dest: "{{jenkins.repo_KEY_DEST}}"
+   register: command_result
+   become: yes
+
+ - name: Ensure the Jenkins repository is configured
+   apt_repository: 
+      repo: "deb [signed-by={{jenkins.repo_KEY_DEST}}] {{jenkins.repo_URL}}"
+      state: present
+   register: repoadd_result
+   become: yes
+
+ - name: Update apt Cache Running - "sudo apt update"
+   apt: 
+      update_cache: yes
+      state: latest
+   register: cacheupdate_result
+
+ - name: Checking for dependency - Ensure Java 11 JDK is present - Installing Java 11
+   apt:
+      name: "{{java}}"
+      state: present
+   register: javainstall_result
+
+
+ - name: Installing Jenkins
+   apt:
+      name: jenkins
+      state: latest
+   register: jenkinsinstall_result
+   
+ - name: Start Jenkins service
+   service:
+      name: jenkins
+      enabled: true
+      state: started
+   register: jenkinsservice_result
+

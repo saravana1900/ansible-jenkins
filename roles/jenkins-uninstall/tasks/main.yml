@@ -1,0 +1,36 @@
+---
+# tasks file for jenkins
+ - name: Remove Jenkins apt URL KEY - Ubuntu
+   ansible.builtin.get_url:
+      url: "{{jenkins.repo_KEY}}"
+      dest: "{{jenkins.repo_KEY_DEST}}"
+      state: absent
+   register: command_result
+   become: yes
+
+ - name: Ensure the Jenkins repository removed
+   apt_repository: 
+      repo: "deb [signed-by={{jenkins.repo_KEY_DEST}}] {{jenkins.repo_URL}}"
+      state: absent
+   register: repoadd_result
+   become: yes
+
+ - name: Update apt Cache Running - "sudo apt update"
+   apt: 
+      update_cache: yes
+      state: latest
+   register: cacheupdate_result
+
+ - name: Uninstalling Jenkins
+   apt:
+      name: jenkins
+      state: absent
+   register: jenkinsinstall_result
+   
+ - name: Disable Jenkins service
+   service:
+      name: jenkins
+      enabled: false
+      state: stopped
+   register: jenkinsservice_result
+
