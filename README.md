@@ -5,7 +5,7 @@
 ### Clone the repository as shown below and get into it
 
 ```
-git clone https://github.com/saravana1900/ansible-playbook-jenkins.git
+git clone https://github.com/saravana1900/ansible-jenkins.git
 cd ansible-playbook-jenkins
 ```
 
