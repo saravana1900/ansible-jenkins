@@ -28,8 +28,7 @@
       update_cache: yes
       state: latest
    register: cacheupdate_result
-   ansible.builtin.debug:
-      var: command_result   
+ 
 
 
  - name: Checking for dependency - Ensure Java 11 JDK is present - Installing Java 11
