@@ -1,6 +1,6 @@
 ---
 # handlers file for jenkins
-handlers:
+
   - name: jenkins service started
     ansible.builtin.service:
       name: jenkins

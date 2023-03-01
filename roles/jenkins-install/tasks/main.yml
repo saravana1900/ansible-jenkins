@@ -8,7 +8,7 @@
    become: yes
 
  - name: Print result of Download Jenkins apt KEY 
-    ansible.builtin.debug:
+   ansible.builtin.debug:
       var: command_result
 
  - name: Ensure the Jenkins repository is configured
@@ -18,7 +18,7 @@
    register: repoadd_result
    become: yes
 
- - name: Print result Jenkins repository configuration
+ - name: Print result Jenkins repository configuration result
    ansible.builtin.debug:
       var: repoadd_result   
 
@@ -38,7 +38,7 @@
       state: present
    register: javainstall_result
 
- - name: Print result of Jenkins instalation 
+ - name: Print result of Jdk 11 installation 
    ansible.builtin.debug:
       var: javainstall_result   
 
@@ -61,8 +61,6 @@
       enabled: true
       state: started
    register: jenkinsservice_result
-   ansible.builtin.debug:
-      var: jenkinsservice_result   
    notify:
      - jenkins service started
      
