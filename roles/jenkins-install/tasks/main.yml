@@ -6,6 +6,8 @@
       dest: "{{jenkins.repo_KEY_DEST}}"
    register: command_result
    become: yes
+   ansible.builtin.debug:
+      var: command_result
 
  - name: Ensure the Jenkins repository is configured
    apt_repository: 
@@ -13,18 +15,27 @@
       state: present
    register: repoadd_result
    become: yes
+   ansible.builtin.debug:
+      var: repoadd_result   
+
 
  - name: Update apt Cache Running - "sudo apt update"
    apt: 
       update_cache: yes
       state: latest
    register: cacheupdate_result
+   ansible.builtin.debug:
+      var: command_result   
+
 
  - name: Checking for dependency - Ensure Java 11 JDK is present - Installing Java 11
    apt:
       name: "{{java}}"
       state: present
    register: javainstall_result
+   ansible.builtin.debug:
+      var: javainstall_result   
+
 
 
  - name: Installing Jenkins
@@ -32,6 +43,9 @@
       name: jenkins
       state: latest
    register: jenkinsinstall_result
+   ansible.builtin.debug:
+      var: jenkinsinstall_result   
+
    
  - name: Start Jenkins service
    service:
@@ -39,6 +53,8 @@
       enabled: true
       state: started
    register: jenkinsservice_result
+   ansible.builtin.debug:
+      var: jenkinsservice_result   
    notify:
      - jenkins service started
      
