@@ -6,7 +6,9 @@
       dest: "{{jenkins.repo_KEY_DEST}}"
    register: command_result
    become: yes
-   ansible.builtin.debug:
+
+ - name: Print result of Download Jenkins apt KEY 
+    ansible.builtin.debug:
       var: command_result
 
  - name: Ensure the Jenkins repository is configured
@@ -15,6 +17,8 @@
       state: present
    register: repoadd_result
    become: yes
+
+ - name: Print result Jenkins repository configuration
    ansible.builtin.debug:
       var: repoadd_result   
 
@@ -33,6 +37,8 @@
       name: "{{java}}"
       state: present
    register: javainstall_result
+
+ - name: Print result of Jenkins instalation 
    ansible.builtin.debug:
       var: javainstall_result   
 
@@ -43,6 +49,8 @@
       name: jenkins
       state: latest
    register: jenkinsinstall_result
+
+ - name: Print result of Jenkins instalation
    ansible.builtin.debug:
       var: jenkinsinstall_result   
 
