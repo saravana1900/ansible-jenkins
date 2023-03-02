@@ -6,7 +6,7 @@
 
 ```
 git clone https://github.com/saravana1900/ansible-jenkins.git
-cd ansible-playbook-jenkins
+cd ansible-jenkins
 ```
 
 ### Modify / Update jenkins-hosts file with your Target Ip-address
